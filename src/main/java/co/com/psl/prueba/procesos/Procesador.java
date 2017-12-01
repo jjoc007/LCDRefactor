@@ -2,6 +2,7 @@ package co.com.psl.prueba.procesos;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -17,7 +18,8 @@ import co.com.psl.prueba.utils.Util;
  *
  */
 public class Procesador {
-
+	
+	private static final Logger LOGGER = Logger.getLogger( Procesador.class.getName() );
 	public static final String LINEA_TERMINACION = "0,0";
 
 	public Procesador() {
@@ -33,10 +35,10 @@ public class Procesador {
 	 *            ingresada
 	 * @param tamano
 	 *            tamaño ingresado
-	 * @throws PruebaExcepcion 
+	 * @throws PruebaExcepcion
 	 */
 	public List<NumeroDTO> procesarCifra(String cifra, int tamano) throws PruebaExcepcion {
-		
+
 		List<NumeroDTO> cifras = Util.validarSegundoParametroEntrada(cifra, tamano);
 
 		ProcesadorNumero procesadorNumero = new ProcesadorNumero();
@@ -45,12 +47,12 @@ public class Procesador {
 			try {
 				procesadorNumero.construirNumero(c);
 			} catch (PruebaExcepcion e) {
-				e.printStackTrace();
+				LOGGER.info(e.getMessage());
 			}
 		});
 
 		return cifras;
-		
+
 	}
 
 	/**
@@ -71,11 +73,7 @@ public class Procesador {
 
 			final int fila = i;
 
-			cifras.forEach(c -> {
-
-				resultado.append(c.getLineas().get(fila).getLinea() + StringUtils.SPACE);
-
-			});
+			cifras.forEach(c -> resultado.append(c.getLineas().get(fila).getLinea() + StringUtils.SPACE));
 
 			resultado.append(StringUtils.LF);
 		}
@@ -97,7 +95,7 @@ public class Procesador {
 					break;
 				}
 
-				String partes[] = entrada.split(",");
+				String[] partes = entrada.split(",");
 
 				if (partes.length != 2) {
 					throw new PruebaExcepcion("Los parametros separados por ',' son incorrectos");
@@ -107,11 +105,11 @@ public class Procesador {
 
 				List<NumeroDTO> cifras = p.procesarCifra(partes[1], tamano);
 				System.out.println(p.imprimirCifra(cifras, tamano));
-				
+
 			}
 
 		} catch (PruebaExcepcion e) {
-			e.printStackTrace();
+			LOGGER.info(e.getMessage());
 		}
 
 	}

@@ -7,11 +7,11 @@ package co.com.psl.prueba.modelo;
  * @author juan
  *
  */
-public class Linea {
+public class LineaDTO {
 
 	private String linea;
 
-	public Linea(String linea) {
+	public LineaDTO(String linea) {
 		super();
 		this.linea = linea;
 	}

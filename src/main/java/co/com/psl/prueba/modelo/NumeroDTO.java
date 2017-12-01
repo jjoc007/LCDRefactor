@@ -19,7 +19,7 @@ public class NumeroDTO {
 	int columnasInternas;
 	Numero modelo;
 
-	List<Linea> lineas;
+	List<LineaDTO> lineas;
 
 	public NumeroDTO() {
 		super();
@@ -44,11 +44,11 @@ public class NumeroDTO {
 		this.setModelo(numero);
 	}
 
-	public List<Linea> getLineas() {
+	public List<LineaDTO> getLineas() {
 		return lineas;
 	}
 
-	public void setLineas(List<Linea> lineas) {
+	public void setLineas(List<LineaDTO> lineas) {
 		this.lineas = lineas;
 	}
 

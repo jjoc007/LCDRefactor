@@ -1,5 +1,6 @@
 package co.com.psl.prueba.utils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -16,6 +17,11 @@ import co.com.psl.prueba.modelo.NumeroDTO;
  *
  */
 public class Util {
+	
+	
+	private Util() {
+		super();
+	}
 
 	/**
 	 * 
@@ -41,7 +47,8 @@ public class Util {
 
 	/**
 	 * 
-	 * valida el segundo parametro que sea numerico y crea una coleccion de numeroDTO con cada cifra 
+	 * valida el segundo parametro que sea numerico y crea una coleccion de
+	 * numeroDTO con cada cifra
 	 * 
 	 * @param param
 	 * @param tamano
@@ -52,14 +59,17 @@ public class Util {
 
 		Util.isNumeric(param);
 
-		List<NumeroDTO> cifras = Stream.of(param.split("")).map(n -> new NumeroDTO(Integer.parseInt(n), tamano))
-				.collect(Collectors.toList());
+		List<NumeroDTO> cifras = new ArrayList<>();
+
+		try (Stream<String> streamNumeros = Stream.of(param.split(""));) {
+			cifras = streamNumeros.map(n -> new NumeroDTO(Integer.parseInt(n), tamano)).collect(Collectors.toList());
+
+		}
 
 		return cifras;
 
 	}
 
-	
 	/**
 	 * 
 	 * Valida que el string ingresado sea numerico

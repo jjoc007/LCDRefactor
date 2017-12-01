@@ -4,7 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import co.com.psl.prueba.enums.Relleno;
 import co.com.psl.prueba.excepciones.PruebaExcepcion;
-import co.com.psl.prueba.modelo.Linea;
+import co.com.psl.prueba.modelo.LineaDTO;
 import co.com.psl.prueba.modelo.NumeroDTO;
 
 /**
@@ -106,7 +106,7 @@ public class ProcesadorNumero {
 			throw new PruebaExcepcion("Estructura de relleno no soportada.");
 		}
 
-		numero.getLineas().add(new Linea(linea.toString()));
+		numero.getLineas().add(new LineaDTO(linea.toString()));
 
 	}
 
@@ -114,7 +114,7 @@ public class ProcesadorNumero {
 	 * 
 	 * Hace el relleno de una fila intercalando espacios y guines bajos
 	 * 
-	 * @param linea
+	 * @param linea 
 	 * @param numero
 	 */
 	private void rellenarColumnasInternas(StringBuilder linea, NumeroDTO numero) {
@@ -140,7 +140,8 @@ public class ProcesadorNumero {
 	 */
 	private void rellenarVaciosColumnasInternas(StringBuilder linea, NumeroDTO numero) {
 
-		linea.append(String.format("%1$-" + numero.getColumnasInternas() + "s", ""));
+		String format = "%1$-" + numero.getColumnasInternas() + "s";
+		linea.append(String.format(format, ""));
 
 	}
 
